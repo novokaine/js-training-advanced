@@ -38,7 +38,7 @@
   "y2": 120,
   "stroke": 10
 }, {
-  "type": "Ark",
+  "type": "Arc",
   "x": 500,
   "y": 250,
   "angleStart": 150,

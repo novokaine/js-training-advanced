@@ -107,18 +107,18 @@ Line.prototype.drawFrame = function drawFrame() {
   ctx.stroke();
 };
 
-function Ark(x, y, angleStart, angleEnd,  radius){
+function Arc(x, y, angleStart, angleEnd,  radius){
   Shape.call(this, x, y);
   this.angleStart   = angleStart;
   this.angleEnd     = angleEnd;
   this.radius       = radius;
 }
 
-Ark.prototype = Object.create(Shape.prototype);
-Ark.prototype.constructor = Ark;
+Arc.prototype = Object.create(Shape.prototype);
+Arc.prototype.constructor = Arc;
 
 
-Ark.prototype.drawFrame = function drawFrame(){
+Arc.prototype.drawFrame = function drawFrame(){
   ctx.strokeStyle = this.fill;
   ctx.beginPath();
   ctx.arc(this.x, this.y, this.angleStart, this.angleEnd, this.radius * Math.PI);
@@ -150,8 +150,8 @@ function createShape(shape) {
     case 'Line':
       return new Line(shape.x, shape.y, shape.x2, shape.y2, shape.stroke);
       break;
-    case 'Ark':
-      return new Ark(shape.x, shape.y, shape.angleStart, shape.angleEnd, shape.radius);
+    case 'Arc':
+      return new Arc(shape.x, shape.y, shape.angleStart, shape.angleEnd, shape.radius);
       break;
     case 'Text':
       return new Text(shape.x, shape.y, shape.text);
