@@ -37,10 +37,17 @@ Shape.prototype.drawFrame = function drawFrame() {
   throw new Error('Implement this function in your shape type');
 };
 
-Shape.prototype.appendErrorMsg = function validateShape(){
+Shape.prototype.appendErrorMsg = function appendErrorMsg(element, message){
+  this.element = element;
+  this.message = message;
+  
   // console.log('validation goes here')
   throw new Error('Validate shape type in each shape');
 };
+
+Shape.prototype.removeErrorMsg = function removeErrorMsg(element) {
+
+}
 
 // Circle "constructor"
 function Circle(x, y, r, fill = 'rgba(0, 0, 200, 0.5)') {
@@ -63,6 +70,11 @@ Circle.prototype.drawFrame = function drawFrame() {
   ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); // Outer circle
   ctx.fill();
 };
+
+Circle.prototype.validateShape = function validateShape(){
+  console.log(this,x, y, r);
+  console.log('here is the circle validate')
+}
 
 // Rectangle "constructor"
 function Rectangle(x, y, width, height, fill = 'rgba(0, 0, 200, 0.5)') {
@@ -142,6 +154,8 @@ Text.prototype.drawFrame = function drawFrame(){
 function createShape(shape) {
   switch (shape.type) {
     case 'Circle':
+      /*let circle = new Circle(shape.x, shape.y, shape.r);
+      return circle.validateShape();*/
       return new Circle(shape.x, shape.y, shape.r);
     case 'Rectangle':
       return new Rectangle(shape.x, shape.y, shape.width, shape.height);
@@ -280,14 +294,15 @@ addShapeBtn.addEventListener('click', () => {
       name = name.replace(/^(.*\[(.*)\])$/, '$2');
       //shapeValidation.validateShape(node);
       shapeAttr[name] = value;
-
   });
-
-
-  if(shapeValidation.validateShape(shapeProps)){
+  
+  const shape = createShape(shapeAttr);
+  shape.draw();
+  
+  /*if(shapeValidation.validateShape(shapeProps)){
     const shape = createShape(shapeAttr);
     shape.draw();
-  }
+  }*/
 }, false);
 
 const clearBtn = document.getElementById('clear');
